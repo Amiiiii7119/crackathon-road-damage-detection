@@ -1,16 +1,17 @@
 # Road Damage Detection – Crackathon (IIT Bombay)
 
 ## Overview
-This repository contains the source code and commands used to train and evaluate an object detection model for the IIT Bombay Crackathon. The task is to detect and classify road damage using bounding boxes.
+This repository contains the source code and commands used to train and evaluate an object detection model for the IIT Bombay Crackathon.  
+The task is to detect and classify road damage using bounding boxes.
 
 ## Dataset
 - Road Damage Detection 2022 (RDD2022)
-- Official randomized dataset provided by the organizers
-- No external data used
+- Official randomized dataset provided by the competition organizers
+- No external data was used
 
 ## Model
 - YOLOv8 Object Detection
-- Pretrained weights (allowed by rules)
+- Pretrained weights were used (allowed as per competition rules)
 
 ## Classes
 0 – Longitudinal Crack  
@@ -20,27 +21,31 @@ This repository contains the source code and commands used to train and evaluate
 4 – Pothole  
 
 ## Training
-```bash
-yolo detect train model=yolov8m.pt data=data.yaml epochs=45 imgsz=640 batch=12 optimizer=AdamW
 
-Inference (Test Set)
+yolo detect train 
+model=yolov8m.pt 
+data=data.yaml 
+epochs=45 
+imgsz=640 
+batch=12 
+optimizer=AdamW
 
-yolo detect predict \
-model="runs/phase1_best/weights/best.pt" \
-source="dataset/test/images" \
-save_txt=True \
+## Inference (Test Set)
+
+yolo detect predict 
+model="runs/phase1_best/weights/best.pt" 
+source="dataset/test/images" 
+save_txt=True 
 save_conf=True
 
-Each test image generates a .txt file with:
+Each test image generates a `.txt` file with the following format:
 
 <class_id> <x_center> <y_center> <width> <height> <confidence_score>
 
-All prediction files were placed in a predictions folder and zipped as submission.zip.
+All prediction files were placed inside a `predictions` folder and zipped as `submission.zip` for final submission.
 
-Reproducibility
-
-Commands provided are sufficient to reproduce training and inference
-
-No test labels accessed
-
-All competition rules followed
+## Reproducibility
+- Training and inference commands provided are sufficient to reproduce the results
+- No test labels were accessed
+- Only the officially provided dataset was used
+- All competition rules and guidelines were followed
